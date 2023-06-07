@@ -1,0 +1,20 @@
+{#utilisation squelette#}
+{% extends "base.html.twig" %}
+
+{#Définition titre#}
+{% block title %}Problème interne au serveur : erreur 500{% endblock %}
+
+{#Remplissage du body#}
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+
+                <h1 class="img-fluid my-3">Erreur 500 : Problème interne au serveur</h1>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
