@@ -11,6 +11,10 @@ body{
     margin-right: 16px;
 }
 
+.nav-item i{
+    color: black;
+}
+
 .wolverine-cover{
     height: 400px;
     background-image: url('../images/wolverine-cover.jpg');
