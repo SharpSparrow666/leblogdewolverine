@@ -16,6 +16,12 @@ cd leblogdewolverine
 composer install
 ```
 
+### Création BDD
+Configurer la connexion à la BDD dans le fichier .env (cours) puis commandes suivantes
+```
+symfony console doctrine:database:create
+symfony console doctrine:migrations:migrate
+
 ### Lancer le serveur
 ```
 symfony serve
