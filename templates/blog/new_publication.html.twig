@@ -1,0 +1,28 @@
+{#utilisation squelette#}
+{% extends "base.html.twig" %}
+
+{#Définition titre#}
+{% block title %}Nouvelle publication{% endblock %}
+
+{#Remplissage du body#}
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <h1 class="text-center my-5">Nouvelle publication</h1>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md mx-auto">
+
+                {{ form(new_publication_form) }}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
