@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use mysql_xdevapi\Warning;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,8 +32,12 @@ class NewPublicationFormType extends AbstractType
                     ])
     ]
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditorType::class, [
                 'label' => 'contenu',
+                'purify_html' => true,
+                'attr' => [
+                    'class' => 'd-none',
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci de renseigner un contenu',

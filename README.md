@@ -33,6 +33,11 @@ Cette commande créera :
 * 10 comptes utilisateurs
 * 50 articles
 
+### Installation fichiers front-end des bundles (CKEditor)
+```
+symfony console assets:install public
+
+```
 ### Lancer le serveur
 ```
 symfony serve
