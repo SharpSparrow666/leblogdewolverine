@@ -19,8 +19,27 @@
 
     <div class="row">
         <div class="col-12 col-md-4 mx-auto">
-            {{ form(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
+
+                {{ form_errors(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.pseudonym) }}
+                {{ form_row(registrationForm.plainPassword) }}
+
+                <div class="g-recaptcha mb-2" data-sitekey="{{ google_recaptcha_site_key }}"></div>
+
+                {{ form_row(registrationForm.save) }}
+
+            {{ form_end(registrationForm) }}
+
         </div>
     </div>
 
 {% endblock %}
+
+{% block js %}
+{#  Script pour faire fonctionner CAPTCHA  #}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+
