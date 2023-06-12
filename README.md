@@ -22,6 +22,17 @@ Configurer la connexion à la BDD dans le fichier .env (cours) puis commandes su
 symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 
+```
+
+### Création des fixtures
+```
+symfony console doctrine:fixtures:load
+```
+Cette commande créera :
+* Un compte admin (email: perso, password:perso)
+* 10 comptes utilisateurs
+* 50 articles
+
 ### Lancer le serveur
 ```
 symfony serve
