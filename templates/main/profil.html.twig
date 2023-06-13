@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-12">
 
-                <h1 class="text-center my-5">Gestion du profil</h1>
+                <h1 class="text-center my-5 text-warning">Gestion du profil</h1>
 
             </div>
         </div>
@@ -27,7 +27,15 @@
                         <div class="row">
                             <div class="col-10 mx-auto d-flex justify-content-center align-items-center">
 
-                                <img class="img-thumbnail" src="{{ asset('images/profil_default.jpg')}}" alt="">
+                                {% if app.user.photo is null %}
+
+                                    <img class="img-thumbnail" src="{{ asset('images/profil_default.jpg')}}" alt="">
+
+                                {% else %}
+
+                                    <img class="img-thumbnail" src="{{ asset('images/profils/' ~ app.user.photo )|imagine_filter('profil')}}" alt="">
+
+                                {% endif %}
 
                             </div>
                         </div>
@@ -35,7 +43,7 @@
                         {# Lien vers la page permettant de changer de photo de profil #}
                         <div class="row">
                             <div class="col-12 pt-3">
-                                <a href="#">Modifier la photo de profil</a>
+                                <a href="{{ path('main_edit_photo') }}" class="text-warning text-decoration-none">Modifier la photo de profil</a>
                             </div>
                         </div>
 
@@ -46,12 +54,12 @@
 
                         {# Infos du compte #}
                         <ul class="list-group col-12 col-md-8 p-0">
-                            <li class="list-group-item bg-black text-white">Adresse Email : <span class="text-info">{{ app.user.email }}</span></li>
-                            <li class="list-group-item bg-black text-white">Pseudonyme : <span class="text-info">{{ app.user.pseudonym }}</span></li>
-                            <li class="list-group-item bg-black text-white">Date d'inscription : <span class="text-info">{{ app.user.registrationDate|date('d/m/Y à H\\hi') }}</span></li>
-                            <li class="list-group-item bg-black text-white">
+                            <li class="list-group-item bg-black text-warning">Adresse Email : <span class="text-info text-light">{{ app.user.email }}</span></li>
+                            <li class="list-group-item bg-black text-warning">Pseudonyme : <span class="text-info text-light">{{ app.user.pseudonym }}</span></li>
+                            <li class="list-group-item bg-black text-warning">Date d'inscription : <span class="text-info text-light">{{ app.user.registrationDate|date('d/m/Y à H\\hi') }}</span></li>
+                            <li class="list-group-item bg-black text-warning">
                                 Compte :
-                                <span class="text-info">{{  is_granted('ROLE_ADMIN') ? 'Administrateur' : 'Utilisateur' }}</span>
+                                <span class="text-info text-light">{{  is_granted('ROLE_ADMIN') ? 'Administrateur' : 'Utilisateur' }}</span>
                             </li>
                         </ul>
 
