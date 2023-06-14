@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Form\EditPhotoFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
@@ -16,9 +17,16 @@ class MainController extends AbstractController
 {
 
     #[Route('/', name: 'main_home')]
-    public function home(): Response
+    public function home(ManagerRegistry $doctrine,): Response
     {
-        return $this->render('main/home.html.twig');
+
+        $articleRepo = $doctrine->getRepository(Article::class);
+
+        $articles = $articleRepo->findBy([],['publicationDate' => 'DESC'], $this->getParameter('app.article.number_of_latest_articles_on_home'));
+
+        return $this->render('main/home.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 
     /**
