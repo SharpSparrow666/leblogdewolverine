@@ -59,6 +59,63 @@
                 </div>
             </div>
         </div>
+
+        {#  Espace commentaire  #}
+        <div class="row">
+
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="bg-warning p-4 my-4 rounded">
+                    <h2 class="text-center mb-5 text-dark fw-bold">Commentaires ({{ article.comments|length }})</h2>
+
+                    {% for comment in article.comments %}
+
+                        <div class="card my-3 bg-dark text-light">
+                            <div class="card-body row">
+
+                                {# Photo de profil #}
+                                <div class="px-0 mx-2 d-flex justify-content-center align-items-center comment-profil-photo bg-black">
+
+                                    {# Affichage de la photo de profil de l'auteur, ou de la photo par défaut s'il n'en pas #}
+
+                                    {% if comment.author.photo is null %}
+                                        <img class="img-fluid" src="{{ asset('images/profil_default.jpg')|imagine_filter('comment') }}" alt="">
+                                    {% else %}
+                                        <img class="img-fluid" src="{{ asset('images/profils/' ~ comment.author.photo)|imagine_filter('comment') }}" alt="">
+                                    {% endif %}
+                                    
+                                </div>
+
+                                {# Date et auteur de l'article #}
+                                <div class="col-12 col-sm mt-2 mt-sm-0">
+                                    <footer class="blockquote-footer mt-0 mb-4">Ajouté par <strong class="text-warning mr-1">{{ comment.author.pseudonym }}</strong>
+                                        <br class="d-sm-none">Le <strong class="text-warning">{{ comment.publicationDate|date('d/m/Y à H\\hi') }}</strong></footer>
+                                    {# Affichage du contenu du commentaire, en convertissant les retours à la ligne par des <br> html avec le filtre Twig "nl2br" #}
+                                    <p class="text-warning">{{ comment.content|nl2br }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                    {% endfor %}
+
+                    {% if app.user %}
+
+                        <h2 class="text-center my-5 text-dark">Écrire un commentaire</h2>
+                        {{ form( comment_create_form ) }}
+
+                    {% else %}
+
+                        <p class="text-center text-info text-dark mt-4">
+                            Vous devez <a class="text-dark fw-bold" href="{{ path('app_login') }}">vous connecter</a> pour laisser un commentaire.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 {% endblock %}
