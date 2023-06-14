@@ -93,9 +93,25 @@
                                     <p class="text-warning">{{ comment.content|nl2br }}</p>
                                 </div>
 
+                                {# Si l'utilisateur est un admin, on affiche le bouton permettant de supprimer le commentaire #}
+                                {% if is_granted('ROLE_ADMIN') %}
+
+                                    <div class="admin-button-article">
+
+                                        <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')" class="text-danger text-decoration-none" href="{{ path('blog_comment_delete', {id: comment.id, csrf_token: csrf_token('blog_comment_delete_' ~ comment.id )}) }}">
+                                            <i class="fa-solid fa-trash-can me-1"></i>Supprimer
+                                        </a>
+
+                                    </div>
+
+                                {% endif %}
+
                             </div>
                         </div>
-                        
+                    {% else %}
+
+                        <p class="text-center alert alert-warning">Aucun commentaire n'a été publié pour le moment</p>
+
                     {% endfor %}
 
                     {% if app.user %}
